@@ -6,7 +6,8 @@ export const environment = {
   production: false,
   passwordlength : 6,
  emailPattern : '^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$',
- emailCk : 'maniparasad@gmail.com'
+ emailCk : 'maniparasad@gmail.com',
+ publickey: '6LeIxAcTAAAAAJcZVRqyHh71UMIEGNQ_MXjiZKhI'
 };
 /*
  * For easier debugging in development mode, you can import the following file

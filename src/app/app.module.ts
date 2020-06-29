@@ -51,6 +51,8 @@ import {MatTooltipModule} from '@angular/material/tooltip';
 import {MatTreeModule} from '@angular/material/tree';
 import {LoginComponent } from '../app/login/login.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { RecaptchaModule, RecaptchaFormsModule, RECAPTCHA_SETTINGS, RecaptchaSettings, RECAPTCHA_LANGUAGE } from 'ng-recaptcha';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -111,11 +113,22 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
     BrowserAnimationsModule,
     FormsModule,
     ReactiveFormsModule,
-    HttpClientModule
+    HttpClientModule,
+    RecaptchaModule,
+    RecaptchaFormsModule
 
   ],
   entryComponents: [MatDialogModule],
-  providers: [],
+  providers: [
+    {
+      provide: RECAPTCHA_LANGUAGE,
+      useValue: 'fr', // use French language
+    },{
+    provide: RECAPTCHA_SETTINGS,
+    useValue: {
+      siteKey: '6LeIxAcTAAAAAJcZVRqyHh71UMIEGNQ_MXjiZKhI',
+    } as RecaptchaSettings,
+  }],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

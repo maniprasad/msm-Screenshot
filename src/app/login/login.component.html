@@ -23,10 +23,16 @@
             <div *ngIf="myGroup.hasError('noMatch')"> Passwords do not match!</div>
           
           </mat-error>
-          <!-- <div *ngIf="myGroup.hasError('noMatch')"> Passwords do not match!</div> -->
-          <!-- <div>  status -{{myGroup.controls['confirmpassword'].valid}}  {{myGroup.hasError('noMatch')}} -{{!myGroup.controls['confirmpassword'].valid}} && {{myGroup.controls['confirmpassword'].touched}}</div> -->
-          <!-- {{myGroup.get('confirmpassword').errors | json}} -->
+       
     </mat-form-field>
+    <div>
+    
+      <re-captcha (resolved)="resolved($event)" class="recaptcha"
+                  formControlName="recaptchaReactive" >  
+      </re-captcha>
+      <!-- <re-captcha formControlName="recaptchaReactive"></re-captcha>
+      <button [disabled]="myGroup.invalid">Submit</button> -->
+    </div>
         <div class="form-element">
             <button mat-raised-button color="primary" type="submit" class="button" [disabled]="!myGroup.valid">Submit Form</button>
           </div>

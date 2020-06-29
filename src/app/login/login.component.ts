@@ -19,6 +19,7 @@ class CrossFieldErrorMatcher implements ErrorStateMatcher {
 })
 export class LoginComponent implements OnInit  {
   getList: string;
+  publicKey: any;
   list: any;
   formGroup: FormGroup;
   emailregex;
@@ -35,6 +36,7 @@ export class LoginComponent implements OnInit  {
   ngOnInit(): void {
     this.submitBtnflag = true;
     this.createForm();
+    this.publicKey = environment.publickey;
     this.errorMatcher = new CrossFieldErrorMatcher();
   }
   onSubmit(data , formdata): void{
@@ -49,16 +51,36 @@ const list = [{name: 'maniprasad@gmail.com'}, {name : 'prakash@jio.com'}];
     this.myGroup = new FormGroup({
     email: new FormControl(null , [Validators.required , Validators.pattern(environment.emailPattern) ]),
     password: new FormControl(null , [Validators.required , Validators.minLength(environment.passwordlength)]),
-    confirmpassword: new FormControl(null , [Validators.required , Validators.minLength(environment.passwordlength) ])
+    confirmpassword: new FormControl(null , [Validators.required , Validators.minLength(environment.passwordlength) ]),
+    recaptchaReactive: new FormControl(null, Validators.required)
  },
   {validators:  this.checkPasswords  }
 );
   }
+
   // tslint:disable-next-line:typedef
-  // emailCheck(formGroup: FormGroup){
-  //   const emailCk = formGroup.get('email') === null ? null : formGroup.get('email').value;
-  //   return (emailCk === environment.emailCk) ? true : null;
+  async resolved(captchaResponse: string) {
+    console.log(`Resolved response token: ${captchaResponse}`);
+    await this.sendTokenToBackend(captchaResponse);
+  }
+  // public resolved(res) {
+  //   console.log(`Resolved response token: ${res}`);
+  //   await this.sendTokenToBackend(res);
   // }
+
+  // tslint:disable-next-line:typedef
+  sendTokenToBackend(tok){
+    // calling the service and passing the token to the service
+    // this.service.sendToken(tok).subscribe(
+    //   data => {
+    //     console.log(data)
+    //   },
+    //   err => {
+    //     console.log(err)
+    //   },
+    //   () => {}
+    // );
+  }
 
   checkPasswords(c: FormGroup): ValidationErrors | null  {
     const password = c.get('password');
