@@ -1,0 +1,40 @@
+<div class="container"  novalidate #div1> 
+<form [formGroup]="myGroup" (ngSubmit)="onSubmit(data , myGroup)"   class="form">
+    <div class="form-element">
+      <h1>set new password</h1>
+      </div>
+    <mat-form-field class="form-element">
+        <input matInput placeholder="Emailaddress"  class="form-control"  formControlName="email" type="text"  required>
+        <mat-error *ngIf="!myGroup.controls['email'].valid && myGroup.controls['email'].touched">
+          {{ getErrorEmail() }}
+         
+        </mat-error>
+    </mat-form-field>
+      <mat-form-field class="form-element">
+          <input matInput placeholder="password"  class="form-control"  type="password" formControlName="password" required>
+          <mat-error *ngIf="!myGroup.controls['password'].valid && myGroup.controls['password'].touched">
+              {{ getErrorpassword() }}
+            </mat-error>
+      </mat-form-field>
+      <mat-form-field class="form-element">
+        <input matInput placeholder="Confirm password"  class="form-control"  type="password" [errorStateMatcher]="errorMatcher" formControlName="confirmpassword" required>
+        <mat-error *ngIf="(!myGroup.controls['confirmpassword'].valid && myGroup.controls['confirmpassword'].touched)  || ( myGroup.controls['confirmpassword'].touched &&  myGroup.hasError('noMatch'))">
+            {{ getErrorChnpassword() }}
+            <div *ngIf="myGroup.hasError('noMatch')"> Passwords do not match!</div>
+          
+          </mat-error>
+          <!-- <div *ngIf="myGroup.hasError('noMatch')"> Passwords do not match!</div> -->
+          <!-- <div>  status -{{myGroup.controls['confirmpassword'].valid}}  {{myGroup.hasError('noMatch')}} -{{!myGroup.controls['confirmpassword'].valid}} && {{myGroup.controls['confirmpassword'].touched}}</div> -->
+          <!-- {{myGroup.get('confirmpassword').errors | json}} -->
+    </mat-form-field>
+        <div class="form-element">
+            <button mat-raised-button color="primary" type="submit" class="button" [disabled]="!myGroup.valid">Submit Form</button>
+          </div>
+</form>
+<router-outlet></router-outlet>
+</div>
+
+<!-- <div id="download">
+    <img #canvas  > 
+      <a #downloadLink></a>
+    </div> -->
