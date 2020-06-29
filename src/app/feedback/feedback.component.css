@@ -1,0 +1,15 @@
+.mat-dialog-content{
+    width: 100%;
+    height: 50% !important;
+    overflow-y: hidden;
+}
+.mat-form-field{
+    width: 50%;
+}
+.flex-child {
+   width: 50%;
+   float: left;
+}
+.primary{
+    top: 2px !important;
+}
